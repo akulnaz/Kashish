@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Cute Lil Womaniser 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #cbb4ff, #f3e9ff);
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.quiz-box, #endMessage {
+  background: rgba(255,255,255,0.95);
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 35px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(140, 90, 255, 0.3);
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  color: #7a3db8;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #4b2a63;
+}
+
+label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+button {
+  margin-top: 25px;
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #8f5cff, #c77dff);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(140, 90, 255, 0.4);
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.music-hint {
+  font-size: 13px;
+  color: #7a4aa8;
+  margin-bottom: 10px;
+}
+
+/* floating hearts */
+.heart {
+  position: fixed;
+  color: rgba(180, 130, 255, 0.6);
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+.bigHeart {
+  font-size: 50px !important;
+  color: #ff66cc !important;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* ending message animation */
+#endMessage {
+  display: none;
+  margin: 0 auto;
+  padding: 50px 20px;
+  max-width: none;
+  border-radius: 0;
+  background: linear-gradient(135deg, #d9b3ff, #fcd6ff);
+  font-size: 28px;
+  color: #4b2a63;
+  font-family: 'Pacifico', cursive;
+  animation: bounceGlow 1.2s infinite;
+}
+
+@keyframes bounceGlow {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 5px #ff99cc; }
+  50% { transform: scale(1.1); text-shadow: 0 0 20px #ff66cc, 0 0 30px #ff99cc; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music (Free online sound) -->
+<audio id="bgm" loop>
+  <source src="https://actions.google.com/sounds/v1/ambiences/soft_piano_loop.ogg" type="audio/ogg">
+</audio>
+
+<!-- Silly buzzer for wrong answers (Free online sound) -->
+<audio id="wrong" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+
+<div class="quiz-box" id="quizBox">
+  <h1>My Cute Lil Womaniser 💜</h1>
+  <div class="music-hint">Tap anywhere to start the music 🎶</div>
+
+  <form id="quizForm">
+
+    <p>1. When did we first meet, lallu? 😜</p>
+    <label><input type="radio" name="q1" value="0"> A) 22nd Sep</label>
+    <label><input type="radio" name="q1" value="0"> B) 18th Aug</label>
+    <label><input type="radio" name="q1" value="0"> C) 04th Sep</label>
+    <label><input type="radio" name="q1" value="1"> D) 2nd Aug</label>
+
+    <p>2. When I call you “lallu,” what do I secretly mean? 😝</p>
+    <label><input type="radio" name="q2" value="0"> A) My silly little princess😘</label>
+    <label><input type="radio" name="q2" value="0"> B) Someone I want to tease forever🤙🏻</label>
+    <label><input type="radio" name="q2" value="1"> C) My lil gay boi😍</label>
+    <label><input type="radio" name="q2" value="0"> D) Someone I wouldn’t mind stealing kisses from😝</label>
+
+    <p>3. What’s your fav? 😏</p>
+    <label><input type="radio" name="q3" value="0"> A) Chiku</label>
+    <label><input type="radio" name="q3" value="0"> B) Bhaang🍃</label>
+    <label><input type="radio" name="q3" value="1"> C) Kashish😍</label>
+    <label><input type="radio" name="q3" value="0"> D) The color purple🤰</label>
+
+    <p>4. If I suddenly stole your phone, what would happen? 🧐</p>
+    <label><input type="radio" name="q4" value="0"> A) You’d chase me😳</label>
+    <label><input type="radio" name="q4" value="0"> B) You’d beg back for it😤</label>
+    <label><input type="radio" name="q4" value="0"> C) You’d cry silly lil nigga🤙🏻</label>
+    <label><input type="radio" name="q4" value="1"> D) You’d surrender because I’m too bold😎</label>
+
+    <p>5. Will u be my valentine? 😛</p>
+    <label><input type="radio" name="q5" value="1"> A) Yes😘</label>
+    <label><input type="radio" name="q5" value="0"> B) No🙂‍↕️</label>
+
+    <button type="button" onclick="checkLove()">Submit 💜</button>
+  </form>
+</div>
+
+<!-- Ending message -->
+<div id="endMessage">Yayy now pick me up at 11am on 14th Feb and bring flowers 💖💜</div>
+
+<script>
+/* play music on first click */
+document.body.addEventListener('click', function () {
+  document.body.addEventListener('click', function () {
+  const music = document.getElementById('bgm');
+  music.volume = 0.4;
+  music.play().catch(()=>{});
+}, { once: true });
+}, { once: true });
+
+/* floating hearts */
+function createHeart(big=false){
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  if(big) heart.classList.add('bigHeart');
+  heart.innerHTML = '💜';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = (15 + Math.random() * (big? 50:25)) + 'px';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(() => createHeart(), 400);
+
+/* check answers with silly buzzer */
+function checkLove() {
+  const wrongSound = document.getElementById('wrong');
+  const questions = 5;
+  for(let i=1;i<=questions;i++){
+    const ans = document.querySelector(`input[name="q${i}"]:checked`);
+    if(!ans) {
+      alert('Lallu! Answer question '+i+' 😝'); 
+      return;
+    }
+    if(ans.value !== '1'){
+      wrongSound.play();
+      alert('Wrong, lallu! Try again 😜'); 
+      return; // stop at first wrong answer
+    }
+  }
+
+  // all correct → show ending
+  document.getElementById('quizBox').style.display='none';
+  document.getElementById('endMessage').style.display='block';
+
+  // lots of big floating hearts
+  const heartInterval = setInterval(()=>createHeart(true),200);
+  setTimeout(()=>clearInterval(heartInterval),10000);
+}
+</script>
+
+</body>
+</html>
